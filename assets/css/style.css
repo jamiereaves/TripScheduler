@@ -42,13 +42,38 @@ label {
     border-color: rgb(1, 1, 78);
     border-width: 2px;
     border-style: solid;
+    box-shadow: 2px 2px 1px 0px rgb(9, 9, 44);
+}
+/*set ackground/font/border color for focused form input areas. remove outline from forms*/
+.form-control:focus{
+    outline: none;
+    border-color: burlywood;
+    border-width: 2px;
+    background-color: rgb(1, 1, 78);
+    color: burlywood; 
+    box-shadow: 3px 3px 2px 0px rgb(9, 9, 44);
 }
 /*set background/font color and font styling for submit button*/
 .btn.btn-primary{
     background: rgb(1, 1, 78);
     color: burlywood;
     border-radius: 10px;
+    border-color: burlywood;
     font-family: 'Rye', cursive;
+    outline: none;
+    box-shadow: 2px 2px 1px 0px rgb(9, 9, 44);
+}
+/*set a more pronounced shadow to "raise" the
+button and indicate the user can click.*/
+.btn.btn-primary:hover {
+    box-shadow: 3px 3px 2px 0px rgb(9, 9, 44);
+    outline: none;
+}
+/*restore default shadow to "lower" button and
+create a click effect*/
+.btn.btn-primary:active {
+    box-shadow: 2px 2px 1px 0px rgb(9, 9, 44);
+    outline: none;
 }
 /*set font color/family. set width along with mins and maxes. set height. set 
 background image. set border color/style. center text. set margins. set padding
@@ -67,6 +92,10 @@ to place text*/
     text-align: center; 
     margin: 20px auto 10px auto;
     padding: 30px;
+    box-shadow: 5px 5px 3px 0px rgb(9, 9, 44);
+}
+.card{
+    box-shadow: 3px 3px 2px 0px rgb(9, 9, 44);
 }
 /*set background/font color and font style for table header*/
 #tableHeader {
