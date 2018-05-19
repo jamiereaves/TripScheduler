@@ -1,0 +1,98 @@
+/*set background image for body*/
+body {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+}
+/*set border for cards*/
+.card {
+    border-color: rgb(1, 1, 78);
+    border-width: 2px;
+    border-style: solid;
+    border-radius:5px;
+}
+/*set border for table to eliminate white space, center text*/
+.table.table-bordered.table-hover > thead > tr > th,
+.table.table-bordered.table-hover > tbody > tr > th,
+.table.table-bordered.table-hover > tbody > tr > td{
+    border:1px solid rgb(1, 1, 78);
+    text-align: center;
+}
+/*set min width and margins for table holder*/
+#tableCard{
+    min-width: 620px;
+    margin: 10px auto;
+}
+/*set max width, margins, and default width when bootstrap grid collapses for form card*/
+#formCard{
+    max-width: 620px;
+    margin: 10px auto;
+    width:80%;
+}
+/*set font style/size/color/family for form labels*/
+label {
+    color: rgb(1, 1, 78);
+    font-weight: bold;
+    font-family: 'Fira Mono', monospace;
+    font-size: 20px;
+}
+/*set background/font/border color for form input areas*/
+.form-control{
+    background: burlywood;
+    color: rgb(1, 1, 78);
+    border-color: rgb(1, 1, 78);
+    border-width: 2px;
+    border-style: solid;
+}
+/*set background/font color and font styling for submit button*/
+.btn.btn-primary{
+    background: rgb(1, 1, 78);
+    color: burlywood;
+    border-radius: 10px;
+    font-family: 'Rye', cursive;
+}
+/*set font color/family. set width along with mins and maxes. set height. set 
+background image. set border color/style. center text. set margins. set padding
+to place text*/
+.jumbotron {
+    font-family: 'Fredericka the Great', cursive;
+    width: 60%;
+    max-width: 670px;
+    min-width: 620px;
+    height: 200px;
+    background-image: url("../images/background2.jpg");
+    color: rgb(1, 1, 78);
+    border-color: rgb(1, 1, 78);
+    border-width: 4px;
+    border-style: solid;
+    text-align: center; 
+    margin: 20px auto 10px auto;
+    padding: 30px;
+}
+/*set background/font color and font style for table header*/
+#tableHeader {
+    background: rgb(1, 1, 78);
+    color: burlywood;
+    font-family: 'Fira Mono', monospace;
+}
+/*set background/font color and font family for table body*/
+#tableBody {
+    background: burlywood;
+    color: rgb(1, 1, 78);
+    font-family: 'Fira Mono', monospace;
+}
+/*set background/font color. set font style and center text*/
+.card-header {
+    background: rgb(1, 1, 78);
+    color: burlywood;
+    text-align: center;
+    font-family: 'Rye', cursive;
+    font-size: 32px;
+}
+/*set background image for input form*/
+#form-body{
+    background-image: url("../images/background5.jpg");  
+}
+/*set background image for table*/
+#table-body {
+    background-image: url("../images/background3.jpg");  
+}

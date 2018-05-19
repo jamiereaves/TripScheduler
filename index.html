@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Homework #7</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--links to reset, bootstrap, and custom css files-->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css">
@@ -11,75 +11,86 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
     <!--link to firebase-->
     <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
-
+    <!--link to googlefonts-->
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Fira+Mono|Fredericka+the+Great|Podkova|Rye" rel="stylesheet">
 </head>
 
 <body>
+<!--bootstrap container-->
  <div class="container-fluid">
+    <!--row to hold the page header-->
     <div class=row>
+        <!--single bootstrap column taking up full width at all browser widths-->
         <div class="col-12">
+            <!--jumbotron header-->
             <div class="jumbotron">
-                <h1 class="display-4">Anytime is Train Time</h1>
-                        <hr class="my-4">
-                        <p>choo choo!</p>
+                <h1 class="display-4">TRAIN TIMETABLE TIME!</h1>
             </div>
         </div>
     </div>
-
+    <!--row to hold the page content-->
     <div class="row">
-    <div class="col-md-8">
-    <div class="card clearfix">
-        <h5 class="card-header">Current Train Schedule</h5>
-        <div class="card-body">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (minutes)</th>
-                    <th scope="col">Next Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                </tr>
-                </thead>
-                <tbody id=tableBody>
-                
-                </tbody>
-            </table>  
-        </div>
+        <!--bootstrap column takes up 2/3 of row at lg widths and above-->
+        <div class="col-lg-8">
+            <!--card to hold the timetable-->
+            <div class="card clearfix" id="tableCard">
+                <!--header for card that holds the table-->
+                <h5 class="card-header">Current Train Schedule</h5>
+                <!--body of card taht holds the table-->
+                <div class="card-body" id="table-body">
+                    <!--bootstrap table with 5 columns-->
+                    <table class="table table-bordered table-hover">
+                        <thead id="tableHeader">
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                        </tr>
+                        </thead>
+                        <!--table body, will hold data retrieved from firebase-->
+                        <tbody id="tableBody">
+                        
+                        </tbody>
+                    </table>  
+                </div>
     </div>
     </div>
+    <!--bootstrap column takes up 1/3 of row at lg widths and above-->
+    <div class="col-lg-4">
+        <!--card to hold the add train form-->
+        <div class="card" id="formCard">
+            <!--header for card that holds the form-->
+            <h5 class="card-header">Add A Train</h5>
+            <div class="card-body" id="form-body">
+                <!--form to add train with two text inputs for name and destination, one time input for first arrival, and one number input for frequency-->
+                <form>
+                    <div class="form-group">
+                    <label for="addTrainName">Train Name</label>
+                    <input class="form-control" id="addTrainName" type="text" placeholder="choose a name">
+                    </div>
 
-    <div class="col-md-4">
-    <div class="card">
-        <h5 class="card-header">Add A Train</h5>
-        <div class="card-body">
-        
-            <form>
-                <div class="form-group">
-                  <label for="addTrainName">Train Name</label>
-                  <input class="form-control" id="addTrainName" type="text" placeholder="Default input">
-                </div>
+                    <div class="form-group">
+                        <label for="addDestination">Destination</label>
+                        <input class="form-control" id="addDestination" type="text" placeholder="choose a destination">
+                    </div>
 
-                <div class="form-group">
-                    <label for="addDestination">Destination</label>
-                    <input class="form-control" id="addDestination" type="text" placeholder="Default input">
-                </div>
+                    <div class="form-group">
+                        <label for="firstTrainTime">First Train Time</label>
+                        <input class="form-control" id="firstTrainTime" type="time">
+                    </div>
 
-                <div class="form-group">
-                    <label for="firstTrainTime">First Train Time</label>
-                    <input class="form-control" id="firstTrainTime" type="time">
-                </div>
-
-                <div class="form-group">
-                    <label for="addFrequency">Frequency</label>
-                    <input class="form-control" id="addFrequency" type="number"  min="0" placeholder="in minutes">
-                </div>
-                
-                
-                <button type="submit" class="btn btn-primary" id="addTrainBtn">Submit</button>
-              </form>
-        
-        </div>
+                    <div class="form-group">
+                        <label for="addFrequency">Frequency</label>
+                        <input class="form-control" id="addFrequency" type="number"  min="0" placeholder="in minutes">
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-primary" id="addTrainBtn">Submit</button>
+                </form>
+            
+            </div>
     </div>
     </div>  
     </div>

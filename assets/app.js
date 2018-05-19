@@ -1,4 +1,4 @@
-//Initialize Firebase
+//initialize Firebase
 var config = {
     apiKey: "AIzaSyAeVAZcHT7VMR09wcM_sdcSAEMpyZWJn5s",
     authDomain: "tripscheduler-1d8ed.firebaseapp.com",
@@ -12,11 +12,13 @@ var config = {
 //variable to reference the database
 var database = firebase.database();
 
-//initial values (???????NEEDED?????????)
+//initial values for global variables
 var keyArray = [];
-
-
+var minRemaining = 0;
+var nextTrain = 0;
+  //click function for submit button
   $("#addTrainBtn").on("click", function(event) {
+    //prevent page from reloading on click
     event.preventDefault();
    
    //variables to hold value of text boxes
@@ -24,28 +26,18 @@ var keyArray = [];
     b = $("#addDestination").val().trim();
     c = $("#firstTrainTime").val().trim();
     d = $("#addFrequency").val().trim();
-
-    console.log(a);
-    console.log(b);
-    console.log(d);
+    //prevent submiting empty form or 0 frequency
+    if (a == "" || b == "" || c == "" || d== "" || d == 0){
+        return;
+    }
+    //prevent repeat names 
+    for (i=0; i<keyArray.length; i++) {
+        if (a.toLowerCase() == keyArray[i].toLowerCase()){
+            alert ("That name already exists, please choose a new name.");
+            return;
+        }
+    }
     
-    var firstArr = moment(c, "HH:mm");
-    var freq = d;
-
-    // Current Time
-    var currentTime = moment();
-
-    var diffTime = currentTime.diff(moment(firstArr), "minutes");
-
-    // Time apart (remainder)
-    var tRemainder = diffTime % freq;
-
-    // Minutes Until next Train
-    var minRemaining = freq - tRemainder;
-
-    // Next Train
-    var nextTrain = moment().add(minRemaining, "minutes");
-
     // Save new value to Firebase
     var result = database.ref().push({
       name: a,
@@ -54,9 +46,10 @@ var keyArray = [];
       frequency: d,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
-    console.log(result.key);
-    keyArray.push(result.key);
-  
+    /*
+    keyArray.push(result.key);*/
+   
+    //reset submission fields
     $("#addTrainName").val("");
     $("#addDestination").val("");
     $("#firstTrainTime").val("");
@@ -64,32 +57,30 @@ var keyArray = [];
   });
   
   
-  // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+  //firebase watcher & initial loader
   database.ref().on("child_added", function(childSnapshot) {
+    //push the names of all trains to keyArray, this array will help prevent repeat name entry
+    keyArray.push(Object.values(childSnapshot.val())[4]);
+    //variables to hold the first arrival time and the frequency for calculations
     var firstArr = moment(childSnapshot.val().firstTrain, "HH:mm");
     var freq = childSnapshot.val().frequency;
-
-    // Current Time
+ 
+    //variable to hold current Time
     var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
-
+    //variable to hold difference between current time and first train arrival
     var diffTime = currentTime.diff(moment(firstArr), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
 
-    // Time apart (remainder)
+    //variable to hold remainder of difftime and the frequency of arrival
     var tRemainder = diffTime % freq;
-    console.log(tRemainder);
 
-    // Minute Until Train
-    var minRemaining = freq - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + minRemaining);
+    //minutes until next train
+    minRemaining = freq - tRemainder;
 
-    // Next Train
-    var nextTrain = moment().add(minRemaining, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("h:mm a"));
+    //time of next Train
+    nextTrain = moment().add(minRemaining, "minutes");
     
-    // full list of items to the well
-    $("#tableBody").append("<tr> <th scope='row' id='trainNames'>" + childSnapshot.val().name + "</th> <td id='destinations'>" + childSnapshot.val().destination + "</td> <td id='frequencies'>"+ childSnapshot.val().frequency + "</td> <td id='nextArrivals'>" + moment(nextTrain).format('h:mm a') +"</td> <td id='minutesAway'>" + minRemaining +"</td></tr>"
+    //add table html with firebase data to the table body
+    $("#tableBody").append("<tr> <th scope='row' id='trainNames'>" + childSnapshot.val().name + "</th> <td id='destinations'>" + childSnapshot.val().destination + "</td> <td id='frequencies'> every "+ childSnapshot.val().frequency + " minutes</td> <td id='nextArrivals'>" + moment(nextTrain).format('h:mm a') +"</td> <td id='minutesAway'>" + minRemaining +"</td></tr>"
         );
          
     // Handle the errors
